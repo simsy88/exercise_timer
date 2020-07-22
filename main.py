@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import font
 
+from playsound import playsound
+
 from programme_directory import test_programme, upper_programme
 
 
@@ -31,6 +33,7 @@ class Programme:
         if count > 0:
             root.after(1000, self.countdown, count - 1, function, *args)
         else:
+            playsound('whistle.wav', block=False)
             root.after(0, function, *args)
 
     def display_station(self, n):
@@ -50,6 +53,7 @@ class Programme:
             self.details_label.configure(text=f'Next station: {self.programme[n + 1]["name"]}', background='lightblue')
             self.countdown_label.configure(background='lightblue')
             self.parent.after(0, self.countdown, self.programme[n]['rest_time'], self.display_station, n+1)
+
 
 if __name__ == "__main__":
     root = tk.Tk()
